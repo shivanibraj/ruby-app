@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="application.css">
+<h3 style="color:Tomato;">Update project Details</h3>
+<%= simple_form_for @project do |p| %>
+  <%= p.input :name, label: 'Project Name:  ' ,required:true %><br>
+
+  <%= p.input :description, label: 'Description:  ', placeholder: "Please add description of this project here", :input_html => {:minlength => 0 , maxlength: 1024}  %><br>
+  
+  <%= p.input :tech_stack,label:'Tech stack:  ', placeholder: "Mention tech stack of this project" %><br>
+
+  <%= p.input :clent_details, label:'Client details:  ', placeholder: "Please add client details here" %><br><br>
+
+  <%= p.submit %>
+<% end %>

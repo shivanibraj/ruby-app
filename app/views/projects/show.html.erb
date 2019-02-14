@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="application.css">
+<h3 style="color:Tomato;">Project Details</h3>
+
+<pre>
+<b>Name: </b><b style="border:2px solid Tomato;"><%= @project.name%></b>
+<br>
+<b>Description: </b><b style="border:2px solid Tomato;"><%= @project.description %></b>
+<br>
+<b>Tech_stack: </b><b style="border:2px solid Tomato;"><%= @project.tech_stack %></b>
+<br>
+<b>Client_details: </b><b style="border:2px solid Tomato;"><%= @project.clent_details %></b>
+<br>
+</pre>
+
+<%= button_to 'Remove', @project, method: :delete, data: { confirm: 'Are you sure?' } %>
