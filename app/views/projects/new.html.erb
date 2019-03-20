@@ -1,18 +1,7 @@
+<div class="spacing">
+  <link rel="stylesheet" href="application.scss">
 
-<link rel="stylesheet" href="application.css">
+  <h1 style="color:Tomato;">Create a Project</h1>
+  <%= render "form" %>
 
-<h1 style="color:Tomato;">Create a Project</h1>
-
-<%= simple_form_for @project do |p| %>
-<p>
- <b> <%= p.input :name,label:'Project name :',required:true %></b><br>
-
- <b> <%= p.input :description, label: 'Description:', placeholder: "Please add description of this project here", :input_html => {:minlength => 0 , maxlength: 1024}  %></b><br>
-  
-  <b><%= p.input :tech_stack,label:'Tech stack: ', placeholder: "Mention tech stack of this project" %></b><br>
-
- <b><%= p.input :clent_details, label:'Client details:', placeholder: "Please add client details here" %></b><br><br></p>
-
-  <%= p.submit %>
-
-<% end %>
+</div>

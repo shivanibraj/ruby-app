@@ -1,0 +1,29 @@
+<%= simple_form_for @employee do |p| %>
+  <p>
+ <b><%= p.label :'Employee ID:',:class => 'spacinga'%></b>
+  <%= p.text_field :employee_id ,required:true ,placeholder:"enter employee id",:class => 'form-control'%></b>
+</p>
+<p>
+ <b>  <%= p.label :'Employee name :',:class => 'spacinga'%></b>
+  <%= p.text_field :emp_name, as: :text, placeholder: "enter name",:class => 'form-control'%></b>
+  </p>
+
+  <p>
+  <b><%= p.label :'Designation:',:class => 'spacinga' %></b>
+  <%= p.text_field :designation,placeholder:"Enter employee designation",:class => 'form-control' %>
+</p>
+
+<p>
+
+ <b><%= p.label :'Image :' ,:class => 'spacinga'%></b>
+ <%= p.file_field :image , :class=>"avatar", :alt=>"Avatar"
+%></b></p>
+<p>
+ <b>  <%= p.label :'Choose a project' ,:class => 'spacinga'%></b>
+<%= p.association :projects, as: :check_boxes, collection: Project.order(:name) %>
+ 
+<div class ="spacinga">
+  <%= p.button :submit, :class=> "btn btn-sm btn-primary " %>
+   
+
+<% end %>

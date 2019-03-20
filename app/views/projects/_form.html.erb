@@ -1,0 +1,27 @@
+<%= simple_form_for @project do |p| %>
+  <p>
+ <b><%= p.label :'Project name :',:class => 'spacinga',:class => 'spacinga'%></b>
+  <%= p.input_field :name ,required:true ,placeholder:"Enter project name",:class => 'form-control'%></b>
+</p>
+<p>
+ <b>  <%= p.label :'Description :',:class => 'spacinga'%></b>
+  <%= p.text_field :description, as: :text, placeholder: "Add description of this project here", :input_html => {:minlength => 0 , maxlength: 1024} ,:class => 'form-control'%></b>
+  </p>
+
+  <p>
+  <b><%= p.label :'Techstack :',:class => 'spacinga' %></b>
+  <%= p.text_field :tech_stack,placeholder:"Enter Techstack used in  project",:class => 'form-control' %>
+</p>
+
+<p>
+ <b><%= p.label :'Client details :' ,:class => 'spacinga'%></b>
+ <%= p.text_field :clent_details,placeholder:"Enter client details",:class => 'form-control' %>
+ </b></p>
+
+ <b>  <%= p.label :'Choose employees to assign' ,:class => 'spacinga'%></b>
+<%= p.association :employees, as: :check_boxes, collection: Employee.order(:emp_name) %>
+ 
+  
+<div class ="spacinga">
+  <%= p.button :submit, class: "btn btn-sm btn-primary " %>
+<% end %>

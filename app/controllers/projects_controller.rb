@@ -1,13 +1,22 @@
 class ProjectsController < ApplicationController
-  before_action :current_project, only: [:show, :edit, :update, :destroy]  
+  before_action :current_project, only: [:show, :edit, :update, :destroy]
+
+  def auto_suggest
+    projects = Project.where("name RLIKE ?", params[:term])
+  
+    render json: projects.as_json(:only => [:id, :name])
+  end
 
   def index
-    @projects = Project.all
+    unless params[:query_text].blank?
+      @projects = Project.where("name RLIKE ?", params[:query_text])  
+    else
+      @projects = Project.all
+    end
+    
   end
 
   def show
-  # @project = Project.find(params[:id])
-
   end
 
   def new
@@ -15,40 +24,41 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    #@project = Project.find(params[:id])
   end
 
   def create
-  @project = Project.new(project_params)
- 
-  if @project.save
-    redirect_to projects_path
-  else
-    render 'new'
+    @project = Project.new(project_params)
+   
+    if @project.save
+      redirect_to @project, notice: "New project created successfully."
+    else
+      render :new
+    end
   end
-end
 
   def update
-    #@project = Project.find(params[:id])
-
-    @project.update(project_params)
-
-    redirect_to project_path(@project)
+    if @project.update(project_params)
+      redirect_to project_path(@project)
+    else
+      render :edit
+    end
   end
   
- def destroy
-    @project = Project.find(params[:id])
-    @project.destroy
-
-    redirect_to projects_path
+  def destroy
+    if @project.destroy
+      redirect_to projects_path, notice: "Record deleted successfully."
+    else
+      redirect_to projects_path, alert: "Error: Record not deleted"
+    end
   end
 
-private
-  def project_params
-    params.require(:project).permit(:name, :description, :tech_stack, :clent_details)
-end 
+  private
+    def project_params
+      params.require(:project).permit(:name, :description, :tech_stack, :clent_details,
+        employee_ids: [])
+    end 
 
-def current_project
-    @project = Project.find(params[:id])
-  end
+    def current_project
+      @project = Project.find(params[:id])
+    end
 end

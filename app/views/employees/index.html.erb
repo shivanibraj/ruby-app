@@ -1,0 +1,73 @@
+<h2>EMPLOYEE</h2>
+
+   <div class="container">
+    
+  <%= form_tag employees_path, method: :get, id: "searchForm" do %>
+  <div class="input-group">  
+    <%= text_field_tag :query_text, params[:query_text], 
+      placeholder: "Search employees..." ,class: "form-control" %>
+       <div class="input-group-btn">    
+    </div>  
+  </div>
+  <% end %>  
+</div>
+
+<br>
+<p class="float-right">
+  <%= link_to "Add employee", new_employee_path, class: "btn btn-md btn-primary" %>
+</p>
+
+<% unless @employees.blank? %>
+  <table class="table table-hover table-bordered table-striped ">
+    <thead>
+      <tr>
+        <th>Sl No.</th>
+        <th>Name</th>
+        
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @employees.each_with_index do |employee, index| %>
+        <tr>
+          <td><%= index + 1 %></td>  
+          <td><%= employee.emp_name %></td>
+          
+          <td>
+            <div>
+              <%= link_to "Show", employee_path(employee), 
+                class: "btn btn-sm btn-success" %>
+              <%= link_to "Edit", edit_employee_path(employee), 
+                class: "btn btn-sm btn-primary" %>
+              <%= link_to "Remove",employee_path(employee), method: 'delete',
+                class: "btn btn-sm btn-danger", data: { confirm: 'Are you sure?' } %>
+            </div>
+          </td>
+        </tr>
+      <% end %> 
+    </tbody>
+  </table>
+<% else %>
+  <center><h3>No project found to be shown here!</h3></center>
+<% end %>
+
+
+<link href=" http://code.jquery.com/ui/1.9.1/themes/pepper-grinder/jquery-ui.css" rel="Stylesheet"></link>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   
+<script type="text/javascript">
+  $("#query_text").autocomplete({
+    minLength: 1,
+    source: "<%= auto_suggest_employees_path %>",
+    select: function(event, ui) {
+      $("#query_text").val(ui.item.emp_name);
+      $("#searchForm").submit();
+      return false;
+    }
+  }).data("ui-autocomplete")._renderItem = function(ul,item) {
+    return $("<li class='list-group-item list-group-item-primary'></li>")
+    .data("item.autocomplete", item)
+    .append("<a>"+item.emp_name+"</a>")
+    .appendTo(ul);
+  }
+</script>

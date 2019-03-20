@@ -28,7 +28,19 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # for simple form
 gem 'simple_form'
 
+gem 'carrierwave', '~> 0.10.0'
+gem 'mini_magick', '~> 4.3'
 
+#gem 'sunspot_rails', '2.0.0'
+#gem 'sunspot_solr', '2.0.0'
+#gem 'sunspot_test'
+
+
+#autocomplete
+#gem 'rails4-autocomplete'
+
+#gem 'jquery-ui-rails'
+#gem 'rails-jquery-autocomplete'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -41,7 +53,21 @@ gem 'simple_form'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+
+#added this for automation testing purpose
+ gem 'puma','~> 3.7' 
+ gem 'rspec-rails', '~> 3.0'
+
+ gem 'selenium-webdriver'
+ gem 'factory_girl_rails', '~> 4.0'
+ gem 'chromedriver-helper' 
+ gem 'database_cleaner'
+ gem 'shoulda-callback-matchers', '~> 1.1.1'
+ gem 'shoulda-matchers', '~> 3.1'
+ gem 'rack_session_access'
+
 end
+
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
@@ -49,5 +75,17 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+# added this for automation testing purpose
+#gem 'capybara'
+
+
+ #gem 'selenium-webdriver', '>=2.35.1'
+ 
 end
 
+group :test do
+  gem 'faker'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'launchy'
+end
